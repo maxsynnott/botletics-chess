@@ -1,9 +1,15 @@
-const app = require("express")();
-const { Game } = require("./db/models");
+import "reflect-metadata";
+import { createConnection } from "typeorm";
 
-app.get("/games", async (req: any, res: any) => {
-	const games = await Game.findAll();
-	res.json(games);
-});
+import express from "express";
+import routes from "./routes";
 
-app.listen(8080);
+createConnection()
+	.then(() => {
+		const app = express();
+
+		Object.entries(routes).forEach(([path, router]) => app.use(path, router));
+
+		app.listen(8080);
+	})
+	.catch((error) => console.log(error));
