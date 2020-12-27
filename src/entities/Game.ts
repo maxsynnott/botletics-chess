@@ -17,7 +17,7 @@ export class Game extends BaseEntity {
 	})
 	history: string[];
 
-	public run() {
-		GameService.run(this);
+	public async run() {
+		await GameService.run(this);
 	}
 }

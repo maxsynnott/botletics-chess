@@ -12,9 +12,8 @@ router.get("/", async (_: Request, res: Response) => {
 
 router.post("/:id/run", async (req: Request, res: Response) => {
 	const { id } = req.params;
-	//logic
 	const game = await Game.findOne(+id);
-	game?.run();
+	await game?.run();
 	res.json(game);
 });
 
