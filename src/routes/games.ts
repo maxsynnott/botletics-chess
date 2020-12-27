@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 const express = require("express");
 const router = express.Router();
 
-import { Game } from "../entity/Game";
+import { Game } from "../entities/Game";
 
 router.get("/", async (_: Request, res: Response) => {
 	const games = await Game.find();
@@ -14,6 +14,7 @@ router.post("/:id/run", async (req: Request, res: Response) => {
 	const { id } = req.params;
 	//logic
 	const game = await Game.findOne(+id);
+	game?.run();
 	res.json(game);
 });
 

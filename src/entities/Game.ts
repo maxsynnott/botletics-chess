@@ -1,3 +1,4 @@
+import GameService from "../services/GameService";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @Entity()
@@ -15,4 +16,8 @@ export class Game extends BaseEntity {
 		array: true,
 	})
 	history: string[];
+
+	public run() {
+		GameService.run(this);
+	}
 }
